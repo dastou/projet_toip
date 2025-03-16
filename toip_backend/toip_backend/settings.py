@@ -62,6 +62,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",  # Origine Angular
+    "http://localhost:8080",  # Origine Angular
 ]
 CORS_ALLOW_CREDENTIALS = True
 

@@ -4,7 +4,7 @@ from . import views
 
 router = DefaultRouter()
 router.register(r'groups', views.ContactGroupViewSet, basename='contact-group')
-router.register(r'', views.ContactViewSet, basename='contact')
+router.register(r'me', views.ContactViewSet, basename='contact')
 
 urlpatterns = [
     path('', include(router.urls)),
