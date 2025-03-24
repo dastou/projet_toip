@@ -60,10 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",  # Origine Angular
-    "http://localhost:8080",  # Origine Angular
-]
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 # Configurer REST Framework
@@ -91,26 +88,52 @@ CHANNEL_LAYERS = {
 }
 
 # Ajoutez la configuration de journalisation pour faciliter le débogage
+import os
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
+        'file': {
+            'level': 'WARNING',  # Changé de INFO à WARNING
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'voip.log'),
+            'formatter': 'verbose',
+        },
         'console': {
+            'level': 'INFO',  # Changé de DEBUG à INFO
             'class': 'logging.StreamHandler',
+            'formatter': 'simple',
         },
     },
     'loggers': {
         'django': {
+            'handlers': ['file'],  # Retiré console pour django
+            'level': 'WARNING',  # Changé de DEBUG à WARNING
+            'propagate': True,
+        },
+        'django.server': {
             'handlers': ['console'],
             'level': 'INFO',
+            'propagate': False,
         },
-        'channels': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
+        'signaling': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',  # Changé de DEBUG à INFO
+            'propagate': False,
         },
     },
 }
-
 # Spécifier le modèle utilisateur personnalisé
 AUTH_USER_MODEL = 'users.User'
 

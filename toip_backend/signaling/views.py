@@ -9,32 +9,31 @@ from asgiref.sync import async_to_sync
 from .models import SignalingMessage
 from calls.models import Call
 from calls.serializers import CallSerializer
+import logging
+logger = logging.getLogger('signaling')
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def send_offer(request):
     """Envoie une offre SDP à un autre utilisateur"""
     from .serializers import OfferSerializer  # Import local pour éviter les imports circulaires
-    
     serializer = OfferSerializer(data=request.data)
+
     if serializer.is_valid():
-        # Vérifier que l'appel existe et que l'utilisateur est autorisé
         call_id = serializer.validated_data['call']
         call = get_object_or_404(Call, id=call_id)
-        
-        # Vérifier que l'utilisateur est l'initiateur ou un participant
+
         user_id = request.user.id
-        if call.initiator.id != user_id and not call.participants.filter(id=user_id).exists():
-            return Response({"detail": "Vous n'êtes pas autorisé à envoyer des messages pour cet appel."}, 
-                           status=status.HTTP_403_FORBIDDEN)
-        
-        # Vérifier que le destinataire est un participant
         receiver_id = serializer.validated_data['receiver']
-        if call.initiator.id != receiver_id and not call.participants.filter(id=receiver_id).exists():
-            return Response({"detail": "Le destinataire n'est pas un participant de cet appel."}, 
-                           status=status.HTTP_400_BAD_REQUEST)
-        
-        # Créer le message de signalisation
+
+        logger.info(f"Utilisateur {user_id} envoie une offre SDP à {receiver_id} pour l'appel {call_id}")
+
+        if call.initiator.id != user_id and not call.participants.filter(id=user_id).exists():
+            logger.warning(f"Utilisateur {user_id} non autorisé à envoyer une offre pour l'appel {call_id}")
+            return Response({"detail": "Vous n'êtes pas autorisé"}, status=status.HTTP_403_FORBIDDEN)
+
         message = SignalingMessage(
             call_id=call_id,
             sender_id=user_id,
@@ -43,10 +42,13 @@ def send_offer(request):
             content={'sdp': serializer.validated_data['sdp']}
         )
         message.save()
-        
-        return Response({"detail": "Offre envoyée avec succès."}, status=status.HTTP_201_CREATED)
-    
+
+        logger.info(f"Offre SDP enregistrée pour l'appel {call_id} entre {user_id} et {receiver_id}")
+        return Response({"detail": "Offre envoyée"}, status=status.HTTP_201_CREATED)
+
+    logger.error(f"Erreur lors de l'envoi de l'offre SDP: {serializer.errors}")
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -58,8 +60,8 @@ def send_answer(request):
     if serializer.is_valid():
         # Vérifier que l'appel existe et que l'utilisateur est autorisé
         call_id = serializer.validated_data['call']
-        call = get_object_or_404(Call, id=call_id)
-        
+        call = get_object_or_404(Call.objects.prefetch_related('participants'), id=call_id)
+
         # Vérifier que l'utilisateur est l'initiateur ou un participant
         user_id = request.user.id
         if call.initiator.id != user_id and not call.participants.filter(id=user_id).exists():
@@ -96,8 +98,8 @@ def send_ice_candidate(request):
     if serializer.is_valid():
         # Vérifier que l'appel existe et que l'utilisateur est autorisé
         call_id = serializer.validated_data['call']
-        call = get_object_or_404(Call, id=call_id)
-        
+        call = get_object_or_404(Call.objects.prefetch_related('participants'), id=call_id)
+
         # Vérifier que l'utilisateur est l'initiateur ou un participant
         user_id = request.user.id
         if call.initiator.id != user_id and not call.participants.filter(id=user_id).exists():
@@ -129,8 +131,8 @@ def send_ice_candidate(request):
 def poll_messages(request, call_id):
     """Récupère les messages de signalisation non traités destinés à l'utilisateur"""
     # Vérifier que l'appel existe et que l'utilisateur est autorisé
-    call = get_object_or_404(Call, id=call_id)
-    
+    call = get_object_or_404(Call.objects.prefetch_related('participants'), id=call_id)
+
     # Vérifier que l'utilisateur est l'initiateur ou un participant
     user_id = request.user.id
     if call.initiator.id != user_id and not call.participants.filter(id=user_id).exists():
@@ -142,7 +144,7 @@ def poll_messages(request, call_id):
         call_id=call_id,
         receiver_id=user_id,
         is_processed=False
-    )
+    ).select_related('sender', 'receiver')
     
     # Ajouter des logs
     print(f"User {user_id} polling for messages for call {call_id}")

@@ -221,24 +221,6 @@ class CallViewSet(viewsets.ModelViewSet):
         
         serializer = self.get_serializer(completed_calls, many=True)
         return Response(serializer.data)
-    
-    # Cette action est commentée car nous utilisons WebSockets maintenant
-    # @action(detail=False, methods=['get'])
-    # def incoming(self, request):
-    #     """Récupérer les appels entrants pour l'utilisateur actuel"""
-    #     user = request.user
-    #     
-    #     # Trouver les appels en cours où l'utilisateur est participant mais n'a pas accepté
-    #     incoming_calls = Call.objects.filter(
-    #         participants=user,
-    #         status='in_progress',
-    #         call_participants__user=user,
-    #         call_participants__has_accepted=False,
-    #         call_participants__left_at__isnull=True
-    #     ).distinct()
-    #     
-    #     serializer = self.get_serializer(incoming_calls, many=True)
-    #     return Response(serializer.data)
 
 class CallParticipantViewSet(viewsets.ModelViewSet):
     serializer_class = CallParticipantSerializer

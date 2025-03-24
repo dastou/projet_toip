@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35570297-0a1e-4a9d-bf17-896fdd57dc3b" name="Changes" comment="update project" />
+    <list default="true" id="35570297-0a1e-4a9d-bf17-896fdd57dc3b" name="Changes" comment="update project">
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/toip_backend/calls/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/toip_backend/calls/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/toip_backend/calls/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/toip_backend/calls/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/toip_backend/calls/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/toip_backend/calls/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/toip_backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/toip_backend/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/toip_backend/signaling/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/toip_backend/signaling/consumers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/toip_backend/signaling/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/toip_backend/signaling/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/toip_backend/toip_backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/toip_backend/toip_backend/settings.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,9 +69,17 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Django Server.projet_toip.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.redis: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #3.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #4.executor&quot;: &quot;Run&quot;,
+    &quot;Python.manage.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Acer_M/Documents/DIC2/bd_repartit/projet/mini_projet&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -70,7 +89,36 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="HTTP Request.generated-requests | #4">
+    <configuration name="generated-requests | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="3" requestIdentifier="#3" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="4" requestIdentifier="#4" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="projet_toip" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/toip_backend" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/toip_backend/manage.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="projet_toip" type="Python.DjangoServer" factoryName="Django server">
       <module name="projet_toip" />
       <option name="ENV_FILES" value="" />
@@ -96,6 +144,42 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.redis: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="redis" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.generated-requests | #4" />
+        <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="HTTP Request.generated-requests | #3" />
+        <item itemvalue="Python.manage" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -114,6 +198,13 @@
       <option name="presentableId" value="Default" />
       <updated>1742125099215</updated>
       <workItem from="1742125100888" duration="22770000" />
+      <workItem from="1742222940848" duration="1801000" />
+      <workItem from="1742492656662" duration="998000" />
+      <workItem from="1742665094604" duration="12760000" />
+      <workItem from="1742690684478" duration="3965000" />
+      <workItem from="1742725975886" duration="4558000" />
+      <workItem from="1742731297850" duration="19089000" />
+      <workItem from="1742764943962" duration="11521000" />
     </task>
     <task id="LOCAL-00001" summary="update project">
       <option name="closed" value="true" />
@@ -123,14 +214,36 @@
       <option name="project" value="LOCAL" />
       <updated>1742166548214</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update project">
+      <option name="closed" value="true" />
+      <created>1742223004494</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742223004494</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update project" />
     <option name="LAST_COMMIT_MESSAGE" value="update project" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/projet_toip$manage.coverage" NAME="manage Coverage Results" MODIFIED="1742665959073" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/toip_backend" />
   </component>
 </project>

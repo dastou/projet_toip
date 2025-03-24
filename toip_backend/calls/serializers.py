@@ -22,7 +22,7 @@ class CallSerializer(serializers.ModelSerializer):
     initiator_details = UserSerializer(source='initiator', read_only=True)
     participants_details = CallParticipantSerializer(source='call_participants', many=True, read_only=True)
     messages = CallMessageSerializer(many=True, read_only=True)
-    
+
     class Meta:
         model = Call
         fields = ['id', 'initiator', 'initiator_details', 'participants_details', 
@@ -34,7 +34,8 @@ class CallSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         participants_data = self.context.get('participants', [])
         call = Call.objects.create(**validated_data)
-        
+        print(f"Participants reçus dans le sérialiseur: {participants_data}")
+
         # Ajouter l'initiateur comme participant
         CallParticipant.objects.create(
             call=call,
@@ -44,6 +45,8 @@ class CallSerializer(serializers.ModelSerializer):
         
         # Ajouter les autres participants
         for participant_id in participants_data:
+            print(f"Tentative d'ajout du participant: {participant_id}")
+
             try:
                 from users.models import User
                 user = User.objects.get(id=participant_id)
@@ -52,6 +55,7 @@ class CallSerializer(serializers.ModelSerializer):
                     user=user,
                     has_accepted=False
                 )
+                print(f"Participant {user.username} ajouté avec succès à l'appel {call.id}")
             except User.DoesNotExist:
                 pass
                 
